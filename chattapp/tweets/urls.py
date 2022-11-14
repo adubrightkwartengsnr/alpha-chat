@@ -4,7 +4,8 @@ from . import views
 
 urlpatterns = [
      path('',views.home,name="home"),
-     path('<int:tweet_id>',views.detail_page,name='detail')
+     path('<int:tweet_id>',views.detail_page,name='detail'),
+     path('tweet_view',views.tweets_view,name='tweet_view')
      
 ]
 

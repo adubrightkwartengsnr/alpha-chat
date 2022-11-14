@@ -1,0 +1,40 @@
+{% extends 'tweets/base.html' %}
+
+{% block title %} Tweets {% endblock title %}
+ {% block content %}
+    <h1>Tweet me 2</h1>
+
+    <div id="demo">
+        Loading...
+    </div>
+<script>
+    const tweetsElements = document.getElementById("demo")
+   
+    const xhr = new XMLHttpRequest()
+    const method = 'GET'
+    const url = '/tweets/tweet_view'
+    const responseType = 'json'
+// Tweet model Formatting
+    function formatTweetModel(tweet){
+        var formatedTweet = "<div class ='mb-4 tweet' id='tweet-id" + tweet.id + "'><p>" + tweet.content + "</p></div>"
+        return formatedTweet
+    }
+
+xhr.responseType = responseType
+xhr.open(method,url)
+xhr.onload = function () {
+    const serverResponse = xhr.response
+    const listedItems = serverResponse.response // array 
+    let finalTweetsStr = ""
+    var i;
+    for (i=0;i<listedItems.length;i++){
+        var tweetObj = listedItems[i] 
+        var currentItem = formatTweetModel(tweetObj)
+        finalTweetsStr += currentItem
+    }
+    tweetsElements.innerHTML = finalTweetsStr
+}
+xhr.send()
+
+</script>
+{% endblock content %}
