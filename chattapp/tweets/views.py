@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render
 from django.template import loader
 from django.http import Http404, HttpResponse,JsonResponse
@@ -17,7 +18,7 @@ def tweets_view(request,*args,**kwargs):
     REST API TO BE CONSUMED BY THE FRONTEND
     """
     query_set = Tweet.objects.all()
-    tweet_list = [{'id':tweet.id, 'content':tweet.content } for tweet in query_set]
+    tweet_list = [{'id':tweet.id, 'content':tweet.content,'likes':random.randint(0,100) } for tweet in query_set]
     data = {
         'isUser':False,
         'response':tweet_list

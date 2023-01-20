@@ -2,21 +2,39 @@
 
 {% block title %} Tweets {% endblock title %}
  {% block content %}
-    <h1>Tweet me 2</h1>
 
-    <div id="demo">
-        Loading...
+<div class="row text-center">
+    <div class="column">
+        <h3>Welcome Alpha Chat</h3>
     </div>
+</div>
+
+<div class = "row" >
+       <div id="demo">
+        Loading...
+       </div> 
+</div>
 <script>
     const tweetsElements = document.getElementById("demo")
-   
     const xhr = new XMLHttpRequest()
     const method = 'GET'
     const url = '/tweets/tweet_view'
     const responseType = 'json'
+    
+    function handleLikeId(tweet_id,currentCount){
+        console.log(tweet_id,currentCount)
+
+    }
+    function likeButton(tweet){
+        
+        return "<button class= 'btn btn-primary btn-small' onclick = handleLikeId("+ tweet.id + "," + tweet.likes+ ")>" + tweet.likes + "  Likes</button>"
+
+    }
 // Tweet model Formatting
     function formatTweetModel(tweet){
-        var formatedTweet = "<div class ='mb-4 tweet' id='tweet-id" + tweet.id + "'><p>" + tweet.content + "</p></div>"
+        var formatedTweet = "<div class ='col-12 border-bottom border-top py-3 mb-4 tweet' id='tweet-id" + tweet.id + "'><p>" + tweet.content + 
+        "</p><div class = 'btn-group ' >" + likeButton(tweet) + 
+             "</div></div>"
         return formatedTweet
     }
 
