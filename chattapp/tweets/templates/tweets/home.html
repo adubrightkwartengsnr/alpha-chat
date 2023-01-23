@@ -5,17 +5,17 @@
 
 <div class="row text-center">
     <div class="column">
-        <h3>Welcome Alpha Chat</h3>
+        <h3>Welcome To Alpha Chat</h3>
     </div>
 </div>
 
 <div class = "row" >
-       <div id="demo">
+       <div id="tweet">
         Loading...
        </div> 
 </div>
 <script>
-    const tweetsElements = document.getElementById("demo")
+    const tweetsElements = document.getElementById("tweet")
     const xhr = new XMLHttpRequest()
     const method = 'GET'
     const url = '/tweets/tweet_view'
@@ -23,16 +23,19 @@
     
     function handleLikeId(tweet_id,currentCount){
         console.log(tweet_id,currentCount)
+        currentCount ++
+        return currentCount
 
     }
     function likeButton(tweet){
         
         return "<button class= 'btn btn-primary btn-small' onclick = handleLikeId("+ tweet.id + "," + tweet.likes+ ")>" + tweet.likes + "  Likes</button>"
 
+
     }
 // Tweet model Formatting
     function formatTweetModel(tweet){
-        var formatedTweet = "<div class ='col-12 border-bottom border-top py-3 mb-4 tweet' id='tweet-id" + tweet.id + "'><p>" + tweet.content + 
+        var formatedTweet = "<div class ='col-12 col-md-10 mx-auto rounded border-bottom border-top py-3 mb-4 tweet' id='tweet-id" + tweet.id + "'><p>" + tweet.content +
         "</p><div class = 'btn-group ' >" + likeButton(tweet) + 
              "</div></div>"
         return formatedTweet
@@ -50,6 +53,7 @@ xhr.onload = function () {
         var currentItem = formatTweetModel(tweetObj)
         finalTweetsStr += currentItem
     }
+
     tweetsElements.innerHTML = finalTweetsStr
 }
 xhr.send()
